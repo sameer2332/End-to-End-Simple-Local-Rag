@@ -45,3 +45,17 @@ jobs:
         with:
           push: true
           tags: sam2332/simplelocalrag:latest
+
+      - name: Run Lint Check
+        run: |
+          pip install flake8
+          flake8 .
+
+      - name: Run Lint Check
+        run: |
+          pip install flake8
+          flake8 .
+
+      - name: Run Tests
+        run: |
+          pytest --cov=.
