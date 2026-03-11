@@ -1,0 +1,47 @@
+name: RAG CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test-deploy: 
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Download your project code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Install dependencies
+      - name: Install Requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run Unit Tests
+      - name: Run Tests
+        run: |
+          pytest
+
+      # Login to DockerHub (SECURE)
+      - name: sam2332
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Build and Push Docker Image
+      - name: Build & Push Image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: sam2332/simplelocalrag:latest
