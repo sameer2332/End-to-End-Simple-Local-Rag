@@ -2,22 +2,26 @@ from fastapi import FastAPI
 import torch
 import pandas as pd
 from sentence_transformers import SentenceTransformer, util
-import numpy as np
+
 from cache import get_cache, set_cache
 
 app = FastAPI(title="RAG API")
 device = "cpu"
 
 embedding_model = SentenceTransformer(
-    model_name_or_path="all-mpnet-base-v2", device=device
+    model_name_or_path="all-mpnet-base-v2", 
+    device=device
 )
 
 df = pd.read_csv("text_chunks_and_embeddings_df.csv")
 
 embeddings = torch.tensor(
     df["embedding"]
-    .apply(lambda x: [float(i.strip().replace(",", "")) for i in x.strip("[]").split()])
-    .to_list()
+    .apply(
+    lambda x: [
+        float(i.strip().replace(",", ""))
+        for i in x.strip("[]").split()
+    ]
 )
 
 
