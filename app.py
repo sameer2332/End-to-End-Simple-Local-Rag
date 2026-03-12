@@ -9,7 +9,7 @@ app = FastAPI(title="RAG API")
 device = "cpu"
 
 embedding_model = SentenceTransformer(
-    model_name_or_path="all-mpnet-base-v2", 
+    model_name_or_path="all-mpnet-base-v2",
     device=device
 )
 
