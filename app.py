@@ -18,10 +18,12 @@ df = pd.read_csv("text_chunks_and_embeddings_df.csv")
 embeddings = torch.tensor(
     df["embedding"]
     .apply(
-    lambda x: [
-        float(i.strip().replace(",", ""))
-        for i in x.strip("[]").split()
-    ]
+        lambda x: [
+            float(i.strip().replace(",", ""))
+            for i in x.strip("[]").split()
+        ]
+    )
+    .to_list()
 )
 
 
