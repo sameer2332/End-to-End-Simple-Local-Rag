@@ -54,7 +54,7 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 . --ignore=E501,E302,E231,E225,E252,E203,E201,W291,W293,W292,F401
 
       - name: Run Tests
         run: |
