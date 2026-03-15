@@ -16,3 +16,5 @@ pytest-cov
 flake8
 
 httpx == 0.27.0
+
+chromadb
